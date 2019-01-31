@@ -1,3 +1,5 @@
+**from fastai import * needs to be added to execute past the third input**
+
 #Auto reload imports in jupyter notebook
 
 %reload_ext autoreload
