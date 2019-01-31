@@ -1,5 +1,11 @@
 **from fastai import * needs to be added to execute past the third input**
 
+The Oxford-IIIT PET Dataset has several mislabeled images that may show up in top losses:
+
+https://imgur.com/a/YtmIqmq
+
+http://www.robots.ox.ac.uk/~vgg/data/pets/getCategory.php?category=saint_bernard
+
 #Auto reload imports in jupyter notebook
 
 %reload_ext autoreload
