@@ -44,3 +44,85 @@ Three hyperparameters control the size of the output volume: depth, stride and z
 The spatial size of the output volume can be computed by letting W = input volume size, F = the receptive field size of the CONV layer neurons, S = the stride with which they're applied, and P = the zero padding used.
 
 (W - F + 2P)/S + 1 = Output volume size
+
+In general, setting the zero padding to be P = (F - 1)/2 when the strice is S = 1 ensures that the input volume and the output volume will have the same spatial dimensions.
+
+Notice that if all neurons in a single depth slice are using the same weight vector, then the forward pass of the CONV layer can in each depth slice be computed as a convolution of the neuron’s weights with the input volume (Hence the name: Convolutional Layer). This is why it is common to refer to the sets of weights as a filter (or a kernel), that is convolved with the input.
+
+Summary. To summarize, the Conv Layer:
+
+Accepts a volume of size W1×H1×D1
+Requires four hyperparameters:
+Number of filters K,
+their spatial extent F,
+the stride S,
+the amount of zero padding P.
+Produces a volume of size W2×H2×D2 where:
+W2=(W1−F+2P)/S+1
+H2=(H1−F+2P)/S+1 (i.e. width and height are computed equally by symmetry)
+D2=K
+With parameter sharing, it introduces F⋅F⋅D1 weights per filter, for a total of (F⋅F⋅D1)⋅K weights and K biases.
+In the output volume, the d-th depth slice (of size W2×H2) is the result of performing a valid convolution of the d-th filter over the input volume with a stride of S, and then offset by d-th bias.
+A common setting of the hyperparameters is F=3,S=1,P=1. However, there are common conventions and rules of thumb that motivate these hyperparameters. See the ConvNet architectures section below.
+
+-- Go to http://cs231n.github.io/convolutional-networks/ and CTRL + F "Convolution Demo." for a nice visual demo
+
+**Pooling Layer**
+
+The function of the pooling layer is to progressively reduce the spatial size of the representation to reduce the amount of parameters and computation in the network, and hence to also control overfitting. It is commonly inserted between successive CONV layers in a CNN architecture. The pooling layer operates independently on every depth slice and resizes it spatially using the MAX operation.
+
+Generally the pooling layer:
+
+Accepts a volume of size W1×H1×D1
+Requires two hyperparameters:
+their spatial extent F,
+the stride S,
+Produces a volume of size W2×H2×D2 where:
+W2=(W1−F)/S+1
+H2=(H1−F)/S+1
+D2=D1
+Introduces zero parameters since it computes a fixed function of the input
+For Pooling layers, it is not common to pad the input using zero-padding.
+
+![alt text](http://cs231n.github.io/assets/cnn/maxpool.jpeg "Max pooling example")
+
+Pooling layers may be on their way out and "it seems likely that future architectures will feature very few to no pooling layers."
+
+**Normilzation Layer**
+
+Many types of normalization layers have been proposed for use in ConvNet architectures, sometimes with the intentions of implementing inhibition schemes observed in the biological brain. However, these layers have since fallen out of favor because in practice their contribution has been shown to be minimal, if any. For various types of normalizations, see the discussion in Alex Krizhevsky’s cuda-convnet library API.
+
+**Fully-connected layer**
+
+Neurons in a fully connected layer have full connections to all activations in the previous layer, as seen in regular Neural Networks. Their activations can hence be computed with a matrix multiplication followed by a bias offset.
+
+**Layer patterns**
+
+The most common form of a ConvNet architecture stacks a few CONV-RELU layers, follows them with POOL layers, and repeats this pattern until the image has been merged spatially to a small size. At some point, it is common to transition to fully-connected layers. The last fully-connected layer holds the output, such as the class scores. In other words, the most common ConvNet architecture follows the pattern:
+
+INPUT -> [[CONV -> RELU]*N -> POOL?]*M -> [FC -> RELU]*K -> FC
+
+where the * indicates repetition, and the POOL? indicates an optional pooling layer. Moreover, N >= 0 (and usually N <= 3), M >= 0, K >= 0 (and usually K < 3). For example, here are some common ConvNet architectures you may see that follow this pattern:
+
+INPUT -> FC, implements a linear classifier. Here N = M = K = 0.
+INPUT -> CONV -> RELU -> FC
+INPUT -> [CONV -> RELU -> POOL]*2 -> FC -> RELU -> FC. Here we see that there is a single CONV layer between every POOL layer.
+INPUT -> [CONV -> RELU -> CONV -> RELU -> POOL]*3 -> [FC -> RELU]*2 -> FC Here we see two CONV layers stacked before every POOL layer. This is generally a good idea for larger and deeper networks, because multiple stacked CONV layers can develop more complex features of the input volume before the destructive pooling operation.
+
+**In practice: use whatever works best on ImageNet.** If you’re feeling a bit of a fatigue in thinking about the architectural decisions, you’ll be pleased to know that in 90% or more of applications you should not have to worry about these. I like to summarize this point as “don’t be a hero”: Instead of rolling your own architecture for a problem, you should look at whatever architecture currently works best on ImageNet, download a pretrained model and finetune it on your data. **You should rarely ever have to train a ConvNet from scratch or design one from scratch.** I also made this point at the Deep Learning school.
+
+**Layer sizing patterns**
+
+The input layer should be divisible by 2 many times
+
+The conv layers should be using small filters - 3x3 or at most 5x5, using a stride if S=1 and crucially, padding the input volume with zeros in such a way that the conv layer does not alter the spatial dimensions of the input.
+
+Zero-padding generally improves performance and prevents the borders of the image from being "washed away" by downsampling and stuff.
+
+A stride of 1 works better in practice.
+
+**Case studies**
+
+http://arxiv.org/abs/1512.03385
+
+ResNet. Residual Network developed by Kaiming He et al. was the winner of ILSVRC 2015. It features special skip connections and a heavy use of batch normalization. The architecture is also missing fully connected layers at the end of the network. The reader is also referred to Kaiming’s presentation ([video](https://www.youtube.com/watch?v=1PGLj-uKT1w), [slides](http://research.microsoft.com/en-us/um/people/kahe/ilsvrc15/ilsvrc2015_deep_residual_learning_kaiminghe.pdf)), and some [recent experiments](https://github.com/gcr/torch-residual-networks) that reproduce these networks in Torch. ResNets are currently by far state of the art Convolutional Neural Network models and are the default choice for using ConvNets in practice (as of May 10, 2016). In particular, also see more recent developments that tweak the original architecture from Kaiming He et al. Identity Mappings in Deep Residual Networks (published March 2016).
