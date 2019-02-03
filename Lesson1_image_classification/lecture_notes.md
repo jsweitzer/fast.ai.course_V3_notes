@@ -1,5 +1,10 @@
 **from fastai import * needs to be added to execute past the third input**
 
+External Links:
+
+* https://arxiv.org/pdf/1512.03385.pdf - Deep Residual Learning for Image Recognition
+* http://cs231n.github.io/convolutional-networks/ - CS231n Convolutional Neural Networks for Visual Recognition
+
 The Oxford-IIIT PET Dataset has several mislabeled images that may show up in top losses:
 
 https://imgur.com/a/YtmIqmq
