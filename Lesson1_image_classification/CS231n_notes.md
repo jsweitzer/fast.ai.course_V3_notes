@@ -30,3 +30,17 @@ When dealing with high-dimensional inputs such as images, as we saw above it is 
 Example 1. For example, suppose that the input volume has size [32x32x3], (e.g. an RGB CIFAR-10 image). If the receptive field (or the filter size) is 5x5, then each neuron in the Conv Layer will have weights to a [5x5x3] region in the input volume, for a total of 5*5*3 = 75 weights (and +1 bias parameter). Notice that the extent of the connectivity along the depth axis must be 3, since this is the depth of the input volume.
 
 Example 2. Suppose an input volume had size [16x16x20]. Then using an example receptive field size of 3x3, every neuron in the Conv Layer would now have a total of 3*3*20 = 180 connections to the input volume. Notice that, again, the connectivity is local in space (e.g. 3x3), but full along the input depth (20).
+
+Spatial arrangement:
+
+Three hyperparameters control the size of the output volume: depth, stride and zero-padding.
+
+1. Depth - A hyperparameter that corresponds to the number of filters we would like to use, each learning to look for something different in the input. The different neurons along the depth dimension may activate in the presence of various oriented edges, or blobs of color. The set of neurons looking at the same region of the input volume will be referred to as *the depth column*.
+
+2. Stride - A hyperparemter that adjusts the movement of the filters along the input volume. When stride is 1 the filters move one pixel at a time, when 2 or three, it will move 2 or 3 pixels at a time. 2 and 3 or higher are uncommon and will produce smaller output volumes.
+
+3. Zero-padding - Sometimes it's convenient to pad the input volume with zeros to control the spatial size of the output volume. Zero-padding is a hyper parameter that controls this.
+
+The spatial size of the output volume can be computed by letting W = input volume size, F = the receptive field size of the CONV layer neurons, S = the stride with which they're applied, and P = the zero padding used.
+
+(W - F + 2P)/S + 1 = Output volume size
