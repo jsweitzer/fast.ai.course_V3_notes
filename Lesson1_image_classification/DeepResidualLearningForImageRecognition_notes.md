@@ -2,7 +2,7 @@
 [Source](https://arxiv.org/pdf/1512.03385.pdf)
 
 **TL;DR**
-The source shows successfully trained models with 100 or even 1000 layers. On the ImageNet classification dataset they obtained a 3.57% error rate whil maintaining a lower complexity than VGG nets. This method won 1st place in the ILSVRC 2015 classification competition, the ImageNet detection, ImageNet localization, COCO detections, COCO segmentation in ILSVRC & COCO 2015 competitions. It generalizes very well. It also claims that the residual nets are generally easier to set up and train than other methods.
+The source shows successfully trained models with 100 or even 1000 layers. On the ImageNet classification dataset they obtained a 3.57% error rate while maintaining a lower complexity than VGG nets. This method won 1st place in the ILSVRC 2015 classification competition, the ImageNet detection, ImageNet localization, COCO detections, COCO segmentation in ILSVRC & COCO 2015 competitions. It generalizes very well. It also claims that the residual nets are generally easier to set up and train than other methods.
 
 Deep convolutional neural networks have led to a series of breakthroughs for image classification. Deep networks naturally integration low/mid/high level features and calssifiers in an end-to-end multi-layer fashion, and the "levels" of features can be enriched by the number of stacked layers (depth).
 
@@ -29,3 +29,8 @@ I think F(x) is the original mapping and H(x) - x is the residual. The original 
 
 The formulation of F(x) + x can be realized by [feedforward neural networks](https://en.wikipedia.org/wiki/Feedforward_neural_network) with "shortcut connections". Shortcut connection skip one or more layers. In the case of a deep residual neural network, the shortcut connections perform identity mapping, and their outputs are added to the outputs of the stacked layers. Identity shortcut connections do not add extra parameters or computational complexity. A large deep residual neural network can still be trained end-to-end by [stochastic gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) with [backpropagation](https://en.wikipedia.org/wiki/Backpropagation).
 
+**Residual learning**
+
+Consider H(x) as an underlying mapping to be fit by a few stacked layers (not neccessarily the entire net), with x denoting the inputs to the first of these layers. In residual learning, the neural net layers are explicitly set to approximate a residual function F(x) := H(x) - x, with the original function becoming F(x) + x.
+
+If added layers can be constructed as identity mappings, a deeper model should have a training error no greater than its shallower counter part.
