@@ -13,3 +13,6 @@ The images may still need to be cleaned up after running the validation function
 to successfully fit a model.
 
 I started getting parallel processing errors a few times while generating the data bunch of doing the intial fit call. Interrupting the kernel resolved the issue. Interrupting the kernel also resolved an issue with lr_find freezing up.
+
+
+TODO: figure out why the Learner object doesn't have an export method.
