@@ -2,11 +2,11 @@
 
 FileDeleter is a nice widget that lets you browse by top loss and delete bad/mislabeled images
 
-Checkout **ipywidgets.** It's a nice way to make little applications that function inside of jupyter notebooks.
+* Checkout **ipywidgets.** It's a nice way to make little applications that function inside of jupyter notebooks.
 
-Checkout **Starlette**. It sounds like Flask with async support.
+* Checkout **Starlette**. It sounds like Flask with async support.
 
-Checkout **computational linear algebra for coders**
+* Checkout **computational linear algebra for coders**
 
 Use CPU for production inference systems except at massive scale.
 
@@ -29,10 +29,10 @@ Predictors are functions of pixel values
 The sum of two products is a dot product  
 [**Awesome matrix multiplication animation**](http://www.matrixmultiplication.xyz)
 
-**SGD**
+**SGD**  
 Stochastic Gradient Descent
 
-**tensor**
+**tensor**  
 An array of a regular shape (without jagged edges)  
 Rank is how many axis the tensor has - a vector is a rank 1 tensor
 
