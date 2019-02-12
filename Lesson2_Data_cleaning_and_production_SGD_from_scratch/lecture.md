@@ -33,18 +33,18 @@ The sum of two products is a dot product
 Stochastic Gradient Descent
 
 **tensor**
-An array of a regular shape (without jagged edges)
+An array of a regular shape (without jagged edges)  
 Rank is how many axis the tensor has - a vector is a rank 1 tensor
 
 From generating a random'ish scatter plot @ ~1:24
 
-#Creates a collection of 100 length 2 vectors
-x = torch.ones(100,2)
-#Fiils the first column with **uniformly distributed** random numbers between -1 and 1
-x[:,0].uniform_(-1.,1)
-#Creates a rank 1 tensor
-a = tensor(3.,2)
-#Gets the product of x and a with some random numbers added for noise
-y = x@a + torch.rand(100)
-#Mean squared error is the mean of (the difference of y predicted and y actual squared)
-def mse(y_hat, y): return ((y_hat-y)**2).mean()
+#Creates a collection of 100 length 2 vectors  
+x = torch.ones(100,2)  
+#Fiils the first column with **uniformly distributed** random numbers between -1 and 1  
+x[:,0].uniform_(-1.,1)  
+#Creates a rank 1 tensor  
+a = tensor(3.,2)  
+#Gets the product of x and a with some random numbers added for noise  
+y = x@a + torch.rand(100)  
+#Mean squared error is the mean of (the difference of y predicted and y actual squared)  
+def mse(y_hat, y): return ((y_hat-y)**2).mean()  
