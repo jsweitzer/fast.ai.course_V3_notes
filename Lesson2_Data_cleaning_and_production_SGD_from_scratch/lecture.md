@@ -27,7 +27,6 @@ Use CPU for production inference systems except at massive scale.
 Predictors are functions of pixel values
 
 The sum of two products is a dot product
-
-Applying a vector to a matrix creates a [matrix vector product](http://www.matrixmultiplication.xyz)
+[**Awesome matrix multiplication animation**](http://www.matrixmultiplication.xyz)
 
 
