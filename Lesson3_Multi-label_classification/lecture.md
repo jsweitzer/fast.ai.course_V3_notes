@@ -1,6 +1,6 @@
-(data block api)[https://docs.fast.ai/data_block.html] provides a workflow pipline
+[data block api](https://docs.fast.ai/data_block.html) provides a workflow pipline
 
-(nice data block explanation)[https://blog.usejournal.com/finding-data-block-nirvana-a-journey-through-the-fastai-data-block-api-c38210537fe4]
+[nice data block explanation](https://blog.usejournal.com/finding-data-block-nirvana-a-journey-through-the-fastai-data-block-api-c38210537fe4)
 
 (deforestation kaggle comp)[https://www.kaggle.com/c/planet-understanding-the-amazon-from-space]
 
