@@ -9,7 +9,16 @@ at [https://course.fast.ai/datasets](https://course.fast.ai/datasets)
 
 tfm_y transform parameter needs to be true when using image masks or the mask and source image wont match
 
+use create_unet for segmentation models
+
+[list of transforms](https://docs.fast.ai/vision.transform.html#List-of-transforms)
+
 [**deploying to render**](https://course.fast.ai/deployment_render.html)
+
+Gradually increasing LR early on can prevent getting stuck in loss function surface bumps. Gradually decreasing later on
+can help get to the bottom of a tight loss function curve.
+
+*Slightly* increasing losses early in training can indicate a good LR if it is overall going down.
 
 
 
