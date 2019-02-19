@@ -7,6 +7,10 @@
 Image segmentation involves labeling each pixel of an image. The [camvid dataset](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/) provides some pre labeled. Others are available 
 at [https://course.fast.ai/datasets](https://course.fast.ai/datasets)
 
+tfm_y transform parameter needs to be true when using image masks or the mask and source image wont match
+
+[**deploying to render**](https://course.fast.ai/deployment_render.html)
+
 
 
 
