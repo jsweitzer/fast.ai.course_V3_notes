@@ -20,6 +20,10 @@ can help get to the bottom of a tight loss function curve.
 
 *Slightly* increasing losses early in training can indicate a good LR if it is overall going down.
 
+[IMDB datasets](https://datasets.imdbws.com/) and [documentation](https://www.imdb.com/interfaces/)
+
+
+
 
 
 
